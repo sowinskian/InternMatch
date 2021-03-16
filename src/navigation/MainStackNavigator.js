@@ -29,24 +29,22 @@ function MainStackNavigator() {
         <Stack.Screen
           name='Home'
           component={Home}
-          options={{ title: 'Home Screen' }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name='Profile'
           component={Profile}
-          options={{ title: 'Profile' }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name='Chat'
           component={Chat}
-          options={({ route }) => ({
-            title: route.params.companyName
-          })}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name='Messages'
           component={Messages}
-          options={{ title: 'Messages' }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

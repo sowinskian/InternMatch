@@ -1,12 +1,13 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 
 export default function Chat(props) {
   const { route, navigation } = props
-  const { item } = route.params
+  const { item } = route.params.companyName
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Chat Screen</Text>
+      <Text style={styles.text}>{route.params.companyName}</Text>
     </View>
   )
 }
@@ -14,28 +15,15 @@ export default function Chat(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: '10%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ebebeb'
+    backgroundColor: '#FFECDB'
   },
   text: {
     color: '#101010',
     fontSize: 24,
     fontWeight: 'bold'
-  },
-  card: {
-    width: 350,
-    height: 100,
-    borderRadius: 10,
-    backgroundColor: '#101010',
-    margin: 10,
-    padding: 10,
-    alignItems: 'center'
-  },
-  cardText: {
-    fontSize: 18,
-    color: '#ffd700',
-    marginBottom: 5
   },
   buttonContainer: {
     backgroundColor: '#222',
@@ -46,5 +34,24 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: '#fff'
+  },
+  card: {
+    width: '90%',
+    height: '82%',
+    borderRadius: 20,
+    backgroundColor: '#FFFFFF',
+    margin: "7%",
+    padding: 10,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5
+  },
+  cardText: {
+    fontSize: 18,
+    color: '#ffd700',
+    marginBottom: 5
   }
 })
