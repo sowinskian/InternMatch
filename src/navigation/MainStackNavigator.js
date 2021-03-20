@@ -7,8 +7,6 @@ import Profile from '../screens/Profile'
 import Messages from '../screens/Messages'
 import Chat from '../screens/Chat'
 
-// let LMMessages = [];
-// globalStore.LMMessages;
 const Stack = createStackNavigator()
 
 function MainStackNavigator() {
