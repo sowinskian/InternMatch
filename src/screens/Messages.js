@@ -4,10 +4,13 @@ import backButton from '../../assets/BackButton.png';
 import LM from '../../assets/LM.png';
 import L3 from '../../assets/L3.png';
 
+var LMMessages = [];
+var L3Messages = [];
 export default function Messages(props) {
   const { navigation } = props
   const LMMessage = 'Hey Zach, I would like to talk to you about the position you applied for!';
   const L3Message = 'Hi Zach, I took a look at your resume and I have a few quick questions, want to talk?'
+
   return (
     <View style={styles.container}>
       <View style={{ height: '6%', flexDirection: 'row', alignItems: "center", justifyContent: "space-between" }}>
@@ -26,7 +29,7 @@ export default function Messages(props) {
       </View>
       <ScrollView>
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('Chat', {companyName: 'John (Lockheed Martin)', avatar: LM, chatMessage: LMMessage})} style={{ width: '100%', height: "80%"}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat', {companyName: 'John (Lockheed Martin)', avatar: LM, chatMessage: LMMessage, messageArray: LMMessages})} style={{ width: '100%', height: "80%"}}>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ height: '100%', aspectRatio: 1 }}>
             <Image
@@ -42,7 +45,7 @@ export default function Messages(props) {
         </TouchableOpacity>
       </View>
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('Chat', {companyName: 'Janie (L3 Harris Space)', avatar: L3, chatMessage: L3Message})} style={{ width: '100%', height: "80%"}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat', {companyName: 'Janie (L3 Harris Space)', avatar: L3, chatMessage: L3Message, messageArray: L3Messages})} style={{ width: '100%', height: "80%"}}>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ height: '100%', aspectRatio: 1 }}>
             <Image

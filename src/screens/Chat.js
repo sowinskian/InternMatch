@@ -2,9 +2,10 @@ import React, {useState, useEffect, useCallback }from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 
+let globalMessages = [];
 export default function Chat(props) {
+  const { route, navigation } = props;
   const [messages, setMessages] = useState([]);
-  const { route, navigation } = props
   
   useEffect(() => {
     setMessages([
@@ -19,10 +20,17 @@ export default function Chat(props) {
         },
       },
     ])
+    if(route.params.messageArray !== undefined) {
+      console.log(route.params.messageArray.length);
+      for(let i = 0; i < route.params.messageArray.length;i++) {
+        setMessages(previousMessages => GiftedChat.append(previousMessages, route.params.messageArray[i]));
+      }
+    }
   }, [])
 
   const onSend = useCallback((messages = []) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    route.params.messageArray.push(messages[messages.length - 1]);    
   }, [])
 
   const renderBubble = (props) => {
