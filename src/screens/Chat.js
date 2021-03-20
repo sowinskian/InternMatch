@@ -1,14 +1,60 @@
-import React from 'react'
+import React, {useState, useEffect, useCallback }from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
+import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 
 export default function Chat(props) {
+  const [messages, setMessages] = useState([]);
   const { route, navigation } = props
-  const { item } = route.params.companyName
+  
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: route.params.chatMessage,
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: route.params.avatar,
+        },
+      },
+    ])
+  }, [])
+
+  const onSend = useCallback((messages = []) => {
+    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+  }, [])
+
+  const renderBubble = (props) => {
+    return (
+      <Bubble 
+        {...props}
+        wrapperStyle={{
+          left: {
+            backgroundColor: '#ffbc40'
+          }
+        }}
+        textStyle={{
+          left: {
+            color: '#fff'
+          }
+        }}
+      />
+    )
+  }
+
+  
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Chat Screen</Text>
-      <Text style={styles.text}>{route.params.companyName}</Text>
-    </View>
+    
+    <GiftedChat
+      messages={messages}
+      onSend={messages => onSend(messages)}
+      user={{
+        _id: 1,
+      }}
+      renderBubble={renderBubble}
+      alwaysShowSend
+    />
   )
 }
 
