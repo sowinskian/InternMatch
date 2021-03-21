@@ -8,20 +8,7 @@ export default function Chat(props) {
   const [messages, setMessages] = useState([]);
   
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: route.params.chatMessage,
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: route.params.avatar,
-        },
-      },
-    ])
     if(route.params.messageArray !== undefined) {
-      console.log(route.params.messageArray.length);
       for(let i = 0; i < route.params.messageArray.length;i++) {
         setMessages(previousMessages => GiftedChat.append(previousMessages, route.params.messageArray[i]));
       }

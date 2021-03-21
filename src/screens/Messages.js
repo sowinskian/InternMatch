@@ -4,12 +4,29 @@ import backButton from '../../assets/BackButton.png';
 import LM from '../../assets/LM.png';
 import L3 from '../../assets/L3.png';
 
-var LMMessages = [];
-var L3Messages = [];
+var LMMessages = [{
+  _id: 1,
+  text: 'Hey Zach, I would like to talk to you about the position you applied for!',
+  createdAt: new Date(),
+  user: {
+    _id: 2,
+    name: 'React Native',
+    avatar: LM,
+  },
+}];
+var L3Messages = [{
+  _id: 1,
+  text: 'Hi Zach, I took a look at your resume and I have a few quick questions, want to talk?',
+  createdAt: new Date(),
+  user: {
+    _id: 2,
+    name: 'React Native',
+    avatar: LM,
+  },
+}];
+
 export default function Messages(props) {
   const { navigation } = props
-  const LMMessage = 'Hey Zach, I would like to talk to you about the position you applied for!';
-  const L3Message = 'Hi Zach, I took a look at your resume and I have a few quick questions, want to talk?'
 
   return (
     <View style={styles.container}>
@@ -29,7 +46,7 @@ export default function Messages(props) {
       </View>
       <ScrollView>
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('Chat', {companyName: 'John (Lockheed Martin)', avatar: LM, chatMessage: LMMessage, messageArray: LMMessages})} style={{ width: '100%', height: "80%"}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat', {companyName: 'John (Lockheed Martin)', avatar: LM, messageArray: LMMessages})} style={{ width: '100%', height: "80%"}}>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ height: '100%', aspectRatio: 1 }}>
             <Image
@@ -39,13 +56,13 @@ export default function Messages(props) {
           </View>
           <View style={{ width: '80%', height: '55%' }}>
             <Text style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: '5%' }}>John (Lockheed Martin)</Text>
-            <Text style={{ fontSize: 15, fontWeight: 'normal', paddingLeft: '5%' }}>{LMMessage}</Text>
+            <Text style={{ fontSize: 15, fontWeight: 'normal', paddingLeft: '5%' }}>{LMMessages[LMMessages.length - 1].text}</Text>
           </View>
         </View>
         </TouchableOpacity>
       </View>
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('Chat', {companyName: 'Janie (L3 Harris Space)', avatar: L3, chatMessage: L3Message, messageArray: L3Messages})} style={{ width: '100%', height: "80%"}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat', {companyName: 'Janie (L3 Harris Space)', avatar: L3, messageArray: L3Messages})} style={{ width: '100%', height: "80%"}}>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ height: '100%', aspectRatio: 1 }}>
             <Image
@@ -55,7 +72,7 @@ export default function Messages(props) {
           </View>
           <View style={{ width: '80%', height: '55%' }}>
             <Text style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: '5%' }}>Janie (L3 Harris Space)</Text>
-            <Text style={{ fontSize: 15, fontWeight: 'normal', paddingLeft: '5%' }}>{L3Message}</Text>
+            <Text style={{ fontSize: 15, fontWeight: 'normal', paddingLeft: '5%' }}>{L3Messages[L3Messages.length - 1].text}</Text>
           </View>
         </View>
         </TouchableOpacity>
