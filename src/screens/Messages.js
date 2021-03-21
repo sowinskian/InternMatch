@@ -43,10 +43,10 @@ export default function Messages(props) {
     LMMessagesGlobal.push(message);
   }
   const updateL3MessagesGlobal = (message) => {
-    // setMessageL3Array(L3MessageArray => [...L3MessageArray, message]);
+    setMessageL3Array(L3MessageArray => [...L3MessageArray, message]);
     L3MessagesGlobal.push(message);
   }
-  
+
   return (
     <View style={styles.container}>
       <View style={{ height: '6%', flexDirection: 'row', alignItems: "center", justifyContent: "space-between" }}>
