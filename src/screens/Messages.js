@@ -27,32 +27,24 @@ var L3Messages = [{
 
 export default function Messages(props) {
   const { navigation } = props;
-  const [LMMessageArray, setMessageLMArray] = useState([{
-    _id: 1,
-    text: 'Hey Zach, I would like to talk to you about the position you applied for!',
-    createdAt: new Date(),
-    user: {
-      _id: 2,
-      name: 'React Native',
-      avatar: LM,
-    },
-  }]);
-  const [L3MessageArray, setMessageL3Array] = useState([{
-    _id: 1,
-    text: 'Hi Zach, I took a look at your resume and I have a few quick questions, want to talk?',
-    createdAt: new Date(),
-    user: {
-      _id: 2,
-      name: 'React Native',
-      avatar: LM,
-    },
-  }]);
+  const [LMMessageArray, setMessageLMArray] = useState(LMMessages);
+  const [L3MessageArray, setMessageL3Array] = useState(L3Messages);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setMessageLMArray(LMMessageArray => LMMessages);
+      setMessageL3Array(L3MessageArray => L3Messages);
+    });
+    return unsubscribe;
+  })
 
   const updateLMMessages = (message) => {
     setMessageLMArray(LMMessageArray => [...LMMessageArray, message]);
+    LMMessages.push(message);
   }
   const updateL3Messages = (message) => {
     setMessageL3Array(L3MessageArray => [...L3MessageArray, message]);
+    L3Messages.push(message);
   }
 
   return (
