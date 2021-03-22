@@ -6,6 +6,7 @@ import Home from '../screens/Home'
 import Profile from '../screens/Profile'
 import Messages from '../screens/Messages'
 import Chat from '../screens/Chat'
+import Login from '../screens/Login'
 
 const Stack = createStackNavigator()
 
@@ -13,7 +14,7 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Home'
+        initialRouteName='Login'
         screenOptions={{
           gestureEnabled: true,
           headerStyle: {
@@ -26,10 +27,15 @@ function MainStackNavigator() {
           headerBackTitleVisible: false
         }}
         headerMode='float'>
+          <Stack.Screen
+          name='Login'
+          component={Login}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name='Home'
           component={Home}
-          options={{ headerShown: false }}
+          options={{gestureEnabled:false, headerShown: false }}
         />
         <Stack.Screen
           name='Profile'
