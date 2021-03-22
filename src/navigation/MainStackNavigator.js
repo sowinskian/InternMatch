@@ -39,7 +39,9 @@ function MainStackNavigator() {
         <Stack.Screen
           name='Chat'
           component={Chat}
-          options={{ headerShown: false }}
+          options={({route}) => ({
+            title: route.params.companyName
+          })}
         />
         <Stack.Screen
           name='Messages'
