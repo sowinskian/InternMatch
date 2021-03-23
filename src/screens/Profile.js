@@ -1,12 +1,35 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Button } from 'react-native'
 import backButton from '../../assets/BackButton.png';
 import aPicture from '../../assets/a.png';
 import cap from '../../assets/cap.png';
 import editProfile from '../../assets/editImage.png';
 
+var skills = 'c++, c, java, t, l, b';
+var skillsArr = skills.split(',');
+console.log(skillsArr);
+
 export default function Profile(props) {
   const { navigation } = props
+  const [name, setName] = useState("");
+  const [standing, setStanding] = useState("");
+  const [GPA, setGPA] = useState("");
+  const [experience, setExperience] = useState("");
+  const [courses, setCourses] = useState("");
+  const [statement, setStatement] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setName(name => name);
+      setStanding(standing => standing);
+      setGPA(GPA => GPA);
+      setExperience(experience => experience);
+      setCourses(courses => courses);
+      setStatement(statement => statement);
+    });
+    
+  })
+
 
   return (
     <View style={styles.container}>
@@ -26,7 +49,7 @@ export default function Profile(props) {
       </View>
 
       <View style={styles.card}>
-        <Text style={{fontSize: 30, fontWeight: 'bold', paddingBottom: 10}}>Zachary Jackson</Text>
+        <Text style={{fontSize: 30, fontWeight: 'bold', paddingBottom: 10}}>{name}</Text>
 
         <TouchableOpacity onPress={() => navigation.navigate('editProfile')} style={{ width: '40%', height: "20%", position: 'absolute', left: 270, top: 25 }}>
           <Image
@@ -37,7 +60,7 @@ export default function Profile(props) {
 
         <Image source={cap} style={{ width: '6%', height: "3%", position: 'absolute', left: 20, top: 65}}/>
         <View style={{flexDirection:'row', alignItems:'center'}}>
-          <Text style={{fontSize: 12, fontWeight: 'bold', paddingBottom: 10}}>         Junior at the University of Florida</Text>
+          <Text style={{fontSize: 12, fontWeight: 'bold', paddingBottom: 10}}>{standing}</Text>
         </View>
 
         <Image source={aPicture} style={{ width: '5.3%', height: "2.6%", position: 'absolute', left: 22, top: 90}}/>
