@@ -1,63 +1,132 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import Profile from '../../assets/Profile.png';
 import Messages from '../../assets/Messages.png';
-import Pass from '../../assets/pass.png';
-import Match from '../../assets/match.png';
+import Back from '../../assets/Back.png';
+import Skip from '../../assets/Skip.png';
+import Match from '../../assets/Match.png';
 
-const character = {
-  name: 'Luke Skywalker',
-  home: 'Tatooine',
-  species: 'human'
+import JobCard from '../components/JobCard'
+import InternshipPostings from '../content/InternshipPostings'
+
+const TopBar = ({navigation}) =>
+    <View style={topBarStyles.container}>
+        <View style={topBarStyles.profileView}>
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                <Image source={Profile} style={topBarStyles.icon}/>
+            </TouchableOpacity>
+        </View>
+        <View style={topBarStyles.logoView}>
+            <Text style={topBarStyles.logo}>iM</Text>
+        </View>
+        <View style={topBarStyles.messagesView}>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Messages')}
+                style={topBarStyles.messages}>
+                <Image source={Messages} style={topBarStyles.icon}/>
+            </TouchableOpacity>
+        </View>
+    </View>
+
+const topBarStyles = {
+    container: {
+        flexDirection: 'row',
+        backgroundColor: '#FFECDB',
+        height: '7%',
+        width: '100%',
+        justifyContent: 'space-around',
+        marginBottom: '3%'
+    },
+
+    profileView: {
+        flexDirection: 'row'
+    },
+
+    logoView: {
+        justifyContent: 'center'
+    },
+
+    messagesView: {
+        flexDirection: 'row'
+    },
+
+    logo: {
+        fontSize: 45,
+        fontWeight: 'bold',
+        color: '#FF8047'
+    },
+
+    icon: {
+        resizeMode: 'contain',
+        flex: 1,
+        aspectRatio: 1
+    }
 }
 
-export default function Home(props) {
-  const { navigation } = props
+const MatchOptions = ({onBack, onAdvance}) =>
+    <View style={matchOptionStyles.container}>
+        <View style={matchOptionStyles.button}>
+            <TouchableOpacity onPress={onBack}>
+                <Image source={Back} style={matchOptionStyles.icon}/>
+            </TouchableOpacity>
+        </View>
+        <View style={matchOptionStyles.button}>
+            <TouchableOpacity onPress={onAdvance}>
+                <Image source={Skip} style={matchOptionStyles.icon}/>
+            </TouchableOpacity>
+        </View>
+        <View style={matchOptionStyles.button}>
+            <TouchableOpacity onPress={onAdvance}>
+                <Image source = {Match} style={matchOptionStyles.icon}/>
+            </TouchableOpacity>
+        </View>
+    </View>
+
+const matchOptionStyles = {
+    container: {
+        flexDirection: 'row',
+        backgroundColor: '#FFECDB',
+        height: '15%',
+        width: '100%',
+        justifyContent: 'space-around'
+    },
+
+    button: {
+        flexDirection: 'row'
+    },
+
+    icon: {
+        resizeMode: 'contain',
+        flex: 1,
+        aspectRatio: 1
+    }
+}
+
+export default function Home({navigation}) {
+  const [contentIndex, setContentIndex] = useState(0)
+
+
+  const nextOffer = () => {
+      if (contentIndex == InternshipPostings.length - 1) {
+          setContentIndex(0)
+      } else {
+          setContentIndex(contentIndex + 1)
+      }
+  }
+
+  const prevOffer = () => {
+      if (contentIndex == 0) {
+          setContentIndex(InternshipPostings.length - 1)
+      } else {
+          setContentIndex(contentIndex - 1)
+      }
+  }
+
   return (
     <View style={styles.container}>
-      <View style={{ height: '6%', flexDirection: 'row', alignItems: "center", justifyContent: "space-between" }}>
-        <View style={{ width: '10%', height: "90%", marginRight: "5%"}}>
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={{ width: '100%', height: "100%" }}>
-          <Image
-            source={Profile}
-            style={{ width: '100%', height: "100%" }}
-          />
-        </TouchableOpacity>
-        <View style={{ width: '5%', height: "90%"}}></View>
-        </View>
-        <View style={{ width: '60%', height: "100%", justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{fontSize: 50, fontWeight: 'bold', color: '#FF8047'}}>iM</Text>
-        </View>
-        <View style={{ width: '14.5%', height: "80%"}}>
-          <TouchableOpacity onPress={() => navigation.navigate('Messages')} style={{ width: '100%', height: "100%" }}>
-          <Image
-            source={Messages}
-            style={{ width: '100%', height: "100%" }}
-          />
-        </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.card}>
-      <Text style={{fontSize: 30, fontWeight: 'bold'}}>Software Engineering Intern</Text>
-      </View>
-      <View style={{ height: '10%', flexDirection: 'row', alignItems: "center", justifyContent: "space-between", marginBottom: "5%" }}>
-        <View style={{ width: '40%', height: "100%", marginRight: "5%"}}>
-        <TouchableOpacity onPress={() => {}} style={{ width: '100%', height: "100%", marginRight: "5%" }}>
-          <Image
-            source={Pass}
-            style={{ width: '100%', height: "100%" }}
-          />
-        </TouchableOpacity>
-        </View>
-        <View style={{ width: '40%', height: "100%"}}>
-          <TouchableOpacity onPress={() => {}} style={{ width: '100%', height: "100%", marginLeft: "5%" }}>
-          <Image
-            source={Match}
-            style={{ width: '100%', height: "100%" }}
-          />
-        </TouchableOpacity>
-        </View>
-      </View>
+      <TopBar navigation={navigation}/>
+      <JobCard content={InternshipPostings[contentIndex]}/>
+      <MatchOptions onBack={prevOffer} onAdvance={nextOffer}/>
     </View>
   )
 }
@@ -65,7 +134,7 @@ export default function Home(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: '10%',
+    paddingTop: '7%',
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#FFECDB'
@@ -105,4 +174,3 @@ const styles = StyleSheet.create({
     marginBottom: 5
   }
 })
-
