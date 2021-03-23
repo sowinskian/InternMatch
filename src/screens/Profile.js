@@ -1,9 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Button } from 'react-native'
 import backButton from '../../assets/BackButton.png';
+import aPicture from '../../assets/a.png';
+import cap from '../../assets/cap.png';
 
 export default function Profile(props) {
   const { navigation } = props
+
   return (
     <View style={styles.container}>
       <View style={{ height: '6%', flexDirection: 'row', alignItems: "center", justifyContent: "space-between" }}>
@@ -16,12 +19,90 @@ export default function Profile(props) {
         </TouchableOpacity>
         </View>
         <View style={{ width: '60%', height: "100%", justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{fontSize: 35, fontWeight: 'bold'}}>Profile</Text>
+        <Text style={{fontSize: 35, fontWeight: 'bold', paddingTop: 13}}>Profile</Text>
         </View>
         <View style={{ width: '15%', height: "100%"}}></View>
       </View>
+
       <View style={styles.card}>
-        <Text style={{fontSize: 30, fontWeight: 'bold'}}>Zachary Jackson</Text>
+        <Text style={{fontSize: 30, fontWeight: 'bold', paddingBottom: 10}}>Zachary Jackson</Text>
+
+        <Image source={cap} style={{ width: '6%', height: "3%", position: 'absolute', left: 20, top: 65}}/>
+        <View style={{flexDirection:'row', alignItems:'center'}}>
+          <Text style={{fontSize: 12, fontWeight: 'bold', paddingBottom: 10}}>         Junior at the University of Florida</Text>
+        </View>
+
+        <Image source={aPicture} style={{ width: '5.3%', height: "2.6%", position: 'absolute', left: 22, top: 90}}/>
+        <Text style={{fontSize: 12, fontWeight: 'bold'}}>         3.60/4.00 GPA</Text>
+
+        <Text style={{color: 'grey', fontSize: 25, marginBottom: 10}}>_______________________</Text>
+        <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>Resume</Text>
+        
+        <Text style={{fontSize: 12, fontWeight: 'bold'}}>Zachary_Jackson_Resume_S</Text>
+
+        <View style={{position: 'absolute', top: 170, right: 35}}>
+          <Button
+            title="View"
+            color = "grey"
+          />
+        </View>  
+
+        <Text style={{fontSize: 12, fontWeight: 'bold', paddingBottom: 10}}>pring_2021.pdf</Text>
+
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Experience</Text>
+
+        <View style={{height: 38, width: 50, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 250, left: 20}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>C</Text>
+        </View>
+
+        <View style={{height: 38, width: 65, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 250, left: 80}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>C++</Text>
+        </View>
+
+        <View style={{height: 38, width: 65, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 250, left: 155}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>Java</Text>
+        </View>
+
+        <View style={{height: 38, width: 90, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 250, left: 230}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>MATLAB</Text>
+        </View>
+
+        <View style={{height: 38, width: 130, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 300, left: 20}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>Microcontrollers</Text>
+        </View>
+
+        <View style={{height: 38, width: 80, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 300, left: 160}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>Circuits</Text>
+        </View>
+
+        <View style={{height: 38, width: 60, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 300, left: 250}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>DSP</Text>
+        </View>
+
+        <View style={{height: 38, width: 160, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 350, left: 20}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>Embedded Systems</Text>
+        </View>
+
+
+
+        <View style={{height: 38, width: 140, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 450, left: 20}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>Data Structures</Text>
+        </View>
+
+        <View style={{height: 38, width: 120, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 450, left: 170}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>Digital Logic</Text>
+        </View>
+
+        <View style={{height: 38, width: 220, backgroundColor: '#FFC997', position: 'absolute', borderRadius: 20, position: 'absolute', top: 500, left: 20}}>
+          <Text style={{textAlign: 'center', justifyContent: 'center', paddingTop: 10}}>Human Computer Interaction</Text>
+        </View>
+
+        <Text style={{color: 'grey', fontSize: 25, marginBottom: 10, paddingTop: 135}}>_______________________</Text>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Relevant Coursework</Text>
+        <Text style={{color: 'grey', fontSize: 25, marginBottom: 10, paddingTop: 90}}>_______________________</Text>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Personal Statement</Text>
+        <Text style={{fontSize: 12, fontWeight: 'bold'}}>I'm interested in electrical and computer engineering for aeronautics. I want to build the systems that power spacecraft!</Text>
+
       </View>
     </View>
   )
@@ -68,5 +149,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#ffd700',
     marginBottom: 5
-  }
+  },
+  rectangle: {
+    height: 38,
+    width: 128,
+    backgroundColor: '#FFC997',
+    position: 'absolute', 
+    borderRadius: 20
+  },
 })
