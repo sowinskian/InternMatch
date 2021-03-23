@@ -11,6 +11,17 @@ export default function editProfile(props) {
   const [courses, setCourses] = useState("");
   const [statement, setStatement] = useState("");
 
+  function saveVals()
+  {
+    global.name = name;
+    global.standing = standing;
+    global.GPA = GPA;
+    global.experience = experience;
+    global.courses = courses;
+    global.statement = statement;
+    navigation.navigate('Profile')
+  }
+
   return (
     <View style={styles.container}>
       <View style={{ height: '6%', flexDirection: 'row', alignItems: "center", justifyContent: "space-between" }}>
@@ -29,23 +40,22 @@ export default function editProfile(props) {
       </View>
 
       <View style={styles.card}>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Name:  </Text>
-        <TextInput onChangeText={text => setName(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', height: '7%', width: '70%', fontSize: 15}}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>School and Grade:  </Text>
-        <TextInput onChangeText={text => setStanding(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', fontSize: 15}}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>GPA:  </Text>
-        <TextInput onChangeText={text => setGPA(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', fontSize: 15}}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Experience: </Text>
-        <TextInput onChangeText={text => setExperience(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', fontSize: 15}}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Relevant Coursework: </Text>
-        <TextInput onChangeText={text => setCourses(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '47%', fontSize: 15}}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Personal Statement: </Text>
-        <TextInput onChangeText={text => setStatement(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '50%', fontSize: 15}}></TextInput>
-
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.saveButton} >
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>Name:  </Text>
+        <TextInput defaultValue = {global.name} onChangeText={text => setName(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>School and Grade:  </Text>
+        <TextInput defaultValue = {global.standing} onChangeText={text => setStanding(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>GPA:  </Text>
+        <TextInput defaultValue = {global.GPA} onChangeText={text => setGPA(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>Experience: </Text>
+        <TextInput defaultValue = {global.experience} onChangeText={text => setExperience(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>Relevant Coursework: </Text>
+        <TextInput defaultValue = {global.courses} onChangeText={text => setCourses(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>Personal Statement: </Text>
+        <TextInput defaultValue = {global.statement} onChangeText={text => setStatement(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
+     </View>
+     <TouchableOpacity onPress={() => saveVals()} style={styles.saveButton} >
             <Text style={styles.saveButtonText}>Save</Text>
          </TouchableOpacity>
-     </View>
     </View>
   )
 }
@@ -75,7 +85,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '90%',
-    height: '82%',
+    height: '62%',
     borderRadius: 20,
     backgroundColor: '#FFFFFF',
     margin: "7%",
@@ -102,14 +112,12 @@ const styles = StyleSheet.create({
   },
   saveButton: {
     borderWidth: 1,
-    borderColor: '#007BFF',
-    backgroundColor: '#007BFF',
+    width: "50%",
+    borderColor: '#FF8047',
+    backgroundColor: '#FF8047',
     borderRadius: 15,
     padding: 10,
     margin: 5,
-    position: 'absolute',
-    top: 350,
-    right: 140
   },
   saveButtonText: {
     color: '#FFFFFF',
