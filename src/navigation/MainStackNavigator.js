@@ -7,6 +7,7 @@ import Profile from '../screens/Profile'
 import Messages from '../screens/Messages'
 import Chat from '../screens/Chat'
 import Login from '../screens/Login'
+import editProfile from '../screens/editProfile'
 
 const Stack = createStackNavigator()
 
@@ -59,6 +60,11 @@ function MainStackNavigator() {
         <Stack.Screen
           name='Messages'
           component={Messages}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='editProfile'
+          component={editProfile}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
