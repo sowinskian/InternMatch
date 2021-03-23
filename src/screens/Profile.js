@@ -1,11 +1,34 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Button } from 'react-native'
 import backButton from '../../assets/BackButton.png';
 import aPicture from '../../assets/a.png';
 import cap from '../../assets/cap.png';
+import editProfile from '../../assets/editImage.png';
 
+var experienceArr = [];
+var courseArr = [];
 export default function Profile(props) {
   const { navigation } = props
+  const [name, setName] = useState("");
+  const [standing, setStanding] = useState("");
+  const [GPA, setGPA] = useState("");
+  const [experience, setExperience] = useState("");
+  const [courses, setCourses] = useState("");
+  const [statement, setStatement] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setName(name => global.name);
+      setStanding(standing => global.standing);
+      setGPA(GPA => global.GPA);
+      setExperience(experience => global.experience);
+      setCourses(courses => global.courses);
+      setStatement(statement => global.statement);
+      courseArr = global.courses.split(', ');
+      experienceArr = global.experience.split(',');
+    });
+  })
+
 
   return (
     <View style={styles.container}>
@@ -25,15 +48,22 @@ export default function Profile(props) {
       </View>
 
       <View style={styles.card}>
-        <Text style={{fontSize: 30, fontWeight: 'bold', paddingBottom: 10}}>Zachary Jackson</Text>
+        <Text style={{fontSize: 30, fontWeight: 'bold', paddingBottom: 10}}>{name}</Text>
 
-        <Image source={cap} style={{ width: '6%', height: "3%", position: 'absolute', left: 20, top: 65}}/>
+        <TouchableOpacity onPress={() => navigation.navigate('editProfile')} style={{ width: '40%', height: "20%", position: 'absolute', left: 270, top: 25 }}>
+          <Image
+            source={editProfile}
+            style={{ width: '20%', height: "20%" }}
+          />
+        </TouchableOpacity>
+
+        <Image source={cap} style={{ width: '6%', height: "3%", position: 'absolute', left: 20, top: 62}}/>
         <View style={{flexDirection:'row', alignItems:'center'}}>
-          <Text style={{fontSize: 12, fontWeight: 'bold', paddingBottom: 10}}>         Junior at the University of Florida</Text>
+          <Text style={{fontSize: 12, fontWeight: 'bold', paddingBottom: 10, marginLeft: 25}}>{standing}</Text>
         </View>
 
-        <Image source={aPicture} style={{ width: '5.3%', height: "2.6%", position: 'absolute', left: 22, top: 90}}/>
-        <Text style={{fontSize: 12, fontWeight: 'bold'}}>         3.60/4.00 GPA</Text>
+        <Image source={aPicture} style={{ width: '5.3%', height: "2.6%", position: 'absolute', left: 22, top: 86}}/>
+        <Text style={{fontSize: 12, fontWeight: 'bold'}}>         {GPA} GPA</Text>
 
         <Text style={{color: 'grey', fontSize: 25, marginBottom: 10}}>_______________________</Text>
         <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>Resume</Text>
@@ -101,7 +131,7 @@ export default function Profile(props) {
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Relevant Coursework</Text>
         <Text style={{color: 'grey', fontSize: 25, marginBottom: 10, paddingTop: 90}}>_______________________</Text>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Personal Statement</Text>
-        <Text style={{fontSize: 12, fontWeight: 'bold'}}>I'm interested in electrical and computer engineering for aeronautics. I want to build the systems that power spacecraft!</Text>
+        <Text style={{fontSize: 12, fontWeight: 'bold'}}>{statement}</Text>
 
       </View>
     </View>

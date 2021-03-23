@@ -7,6 +7,7 @@ import Profile from '../screens/Profile'
 import Messages from '../screens/Messages'
 import Chat from '../screens/Chat'
 import Login from '../screens/Login'
+import editProfile from '../screens/editProfile'
 
 const Stack = createStackNavigator()
 
@@ -46,12 +47,24 @@ function MainStackNavigator() {
           name='Chat'
           component={Chat}
           options={({route}) => ({
-            title: route.params.companyName
+            title: route.params.companyName,
+            headerStyle: {
+              backgroundColor: '#FFECDB'
+            },
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+            headerTintColor: '#000',
           })}
         />
         <Stack.Screen
           name='Messages'
           component={Messages}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='editProfile'
+          component={editProfile}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
