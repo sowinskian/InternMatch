@@ -59,8 +59,10 @@ const OtherInternships = ({ name, otherInternships }) =>
         }
     </View>
 
-export default JobCard = ({ content }) =>
-    <ScrollView style={{...styles.card, backgroundColor: content.matched ? '#9EFFCB' : 'white'}}>
+export default JobCard = ({ content, matched }) =>
+    <ScrollView
+        style={{...styles.card, backgroundColor: matched ? '#9EFFCB' : 'white'}}
+        showsVerticalScrollIndicator={false}>
     <Text style={styles.title}>{content.title}</Text>
     <CompanySummary
         logo={content.logo}
@@ -123,7 +125,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        elevation: 5
+        elevation: 5,
+        alignSelf: 'center'
     },
 
     quickInfoText: {

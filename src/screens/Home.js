@@ -9,6 +9,7 @@ import Match from '../../assets/Match.png';
 
 import JobCard from '../components/JobCard'
 import InternshipPostings from '../content/InternshipPostings'
+import { Button } from 'react-native-elements/dist/buttons/Button';
 
 const TopBar = ({navigation}) =>
     <View style={topBarStyles.container}>
@@ -104,36 +105,32 @@ const matchOptionStyles = {
 }
 
 export default function Home({navigation}) {
-  const swiperRef = useRef(null)
-  const [index, setIndex] = useState(0)
+    const swiperRef = useRef(null)
 
-  const back = () => {
-    if (index > 0) {
-        swiperRef.current.scrollBy(-1)
-        setIndex(index - 1)
-    }
-  }
+    const [matches, setMatches] = useState(Array(InternshipPostings.length).fill(false))
 
-  const skip = () => {
-    if (index < InternshipPostings.length - 1) {
+    const match = () => {
+        let newMatches = [...matches]
+        newMatches[swiperRef.current.state.index] = true
+        setMatches(newMatches)
         swiperRef.current.scrollBy(1)
-        setIndex(index + 1)
     }
-  }
 
-  const match = () => {
-    InternshipPostings[index].matched = true
-    skip()
-  }
-
-  return (
+    return (
     <View style={styles.container}>
-      <TopBar navigation={navigation}/>
-        <Swiper ref={swiperRef} showsButtons={false} showsPagination={false} loop={false}>
-            {InternshipPostings.map(posting =>
-                <JobCard content={posting} key={posting.name}/>)}
+        <TopBar navigation={navigation}/>
+        <Swiper
+            ref={swiperRef}
+            showsButtons={false}
+            showsPagination={false}
+            loop={false}>
+            {InternshipPostings.map((posting, i) =>
+                <JobCard content={posting} matched={matches[i]} key={posting.name}/>)}
         </Swiper>
-        <MatchOptions onBack={back} onSkip={skip} onMatch={match}/>
+        <MatchOptions
+            onBack={() => swiperRef.current.scrollBy(-1)}
+            onSkip={() => swiperRef.current.scrollBy(1)}
+            onMatch={match}/>
     </View>
   )
 }
@@ -144,6 +141,7 @@ const styles = StyleSheet.create({
     paddingTop: '7%',
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent: 'center',
     backgroundColor: '#FFECDB'
   },
   text: {
