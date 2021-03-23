@@ -1,116 +1,92 @@
 import React from 'react'
 import { View, ScrollView, Text, Image, StyleSheet } from 'react-native'
 
-const CompanySummary = ({ logo, name, summary }) => {
-    return (
-        <View style={styles.summaryContainer}>
-            <View style={styles.logoContainer}>
-                <Image source={logo} style={styles.logo} />
-            </View>
+const CompanySummary = ({ logo, name, summary }) =>
+    <View style={styles.summaryContainer}>
+        <View style={styles.logoContainer}>
+            <Image source={logo} style={styles.logo} />
+        </View>
+        <View>
+            <Text style={styles.companyName}>{name}</Text>
+            <Text>{summary}</Text>
+        </View>
+    </View>
+
+const QuickInfo = ({ location, level, year }) =>
+    <View>
+        <Text style={styles.quickInfoText}>{location}</Text>
+        <Text style={styles.quickInfoText}>{level + ", " + year}</Text>
+    </View>
+
+const Tag = ({ tag }) =>
+    <View style={styles.tagBubble}>
+        <Text style={styles.tagText}>{tag}</Text>
+    </View>
+
+const TagCloud = ({ tags }) =>
+    <View style={styles.tagContainer}>
+        {tags.map(text => <Tag tag={text} />)}
+    </View>
+
+const DetailParagraph = ({ title, content }) =>
+    <View>
+        <Text style={styles.sectionTitle}>{title}</Text>
+        <Text style={{ marginBottom: 10 }}>{content}</Text>
+    </View>
+
+const SizeStat = ({ range }) =>
+    <View>
+        <Text style={styles.sectionTitle}>Size</Text>
+        <Text>{range + "+ Employees"}</Text>
+    </View>
+
+const MatchRateStat = ({ rate }) =>
+    <View>
+        <Text style={styles.sectionTitle}>Match Rate</Text>
+        <Text>{rate + "%"}</Text>
+    </View>
+
+const OtherInternships = ({ name, otherInternships }) =>
+    <View>
+        <Text style={styles.sectionTitle}>{"Other Internships at " + name}</Text>
+        <View style={styles.dividerLine} />
+        {otherInternships.map(title =>
             <View>
-                <Text style={styles.companyName}>{name}</Text>
-                <Text>{summary}</Text>
+                <Text>{title}</Text>
+                <View style={styles.dividerLine} />
             </View>
-        </View>
-    )
-}
+        )
+        }
+    </View>
 
-const QuickInfo = ({ location, level, year }) => {
-    return (
-        <View>
-            <Text style={styles.quickInfoText}>{location}</Text>
-            <Text style={styles.quickInfoText}>{level + ", " + year}</Text>
-        </View>
-    )
-}
-
-const Tag = ({ tag }) => {
-    return (
-        <View style={styles.tagBubble}>
-            <Text style={styles.tagText}>{tag}</Text>
-        </View>
-    )
-}
-
-const TagCloud = ({ tags }) => {
-    return (
-        <View style={styles.tagContainer}>
-            {tags.map(text => <Tag tag={text} />)}
-        </View>
-    )
-}
-
-const DetailParagraph = ({ title, content }) => {
-    return (
-        <View>
-            <Text style={styles.sectionTitle}>{title}</Text>
-            <Text style={{ marginBottom: 10 }}>{content}</Text>
-        </View>
-    )
-}
-
-const SizeStat = ({ range }) => {
-    return (
-        <View>
-            <Text style={styles.sectionTitle}>Size</Text>
-            <Text>{range + "+ Employees"}</Text>
-        </View>
-    )
-}
-
-const MatchRateStat = ({ rate }) => {
-    return (
-        <View>
-            <Text style={styles.sectionTitle}>Match Rate</Text>
-            <Text>{rate + "%"}</Text>
-        </View>
-    )
-}
-
-const OtherInternships = ({ name, otherInternships }) => {
-    return (
-        <View>
-            <Text style={styles.sectionTitle}>{"Other Internships at " + name}</Text>
-            <View style={styles.dividerLine} />
-            {otherInternships.map(title =>
-                <View>
-                    <Text>{title}</Text>
-                    <View style={styles.dividerLine} />
-                </View>
-            )
-            }
-        </View>
-    )
-}
-
-export default JobCard = ({ content }) => {
-    return (
-        <ScrollView style={styles.card}>
-            <Text style={styles.title}>{content.title}</Text>
-            <CompanySummary
-                logo={content.logo}
-                name={content.name}
-                summary={content.summary} />
-            <QuickInfo
-                location={content.location}
-                level={content.level}
-                year={content.year} />
-            <TagCloud tags={content.tags} />
-            <View style={styles.dividerLine} />
-            <DetailParagraph
-                title="Basic Qualifications"
-                content={content.qualifications} />
-            <DetailParagraph
-                title={"About " + content.name}
-                content={content.about} />
-            <SizeStat range={content.sizeRange} />
-            <MatchRateStat rate={content.matchRate} />
-            <OtherInternships
-                name={content.name}
-                otherInternships={content.otherInternships} />
-        </ScrollView>
-    )
-}
+export default JobCard = ({ content }) =>
+    <ScrollView style={styles.card}>
+        <Text style={styles.title}>{content.title}</Text>
+        <CompanySummary
+            logo={content.logo}
+            name={content.name}
+            summary={content.summary} />
+        <QuickInfo
+            location={content.location}
+            level={content.level}
+            year={content.year} />
+        <TagCloud tags={content.tags} />
+        <View style={styles.dividerLine} />
+        <DetailParagraph
+            title="Basic Qualifications"
+            content={content.qualifications} />
+        <DetailParagraph
+            title="Position Description"
+            content={content.positionDescription} />
+        <DetailParagraph
+            title={"About " + content.name}
+            content={content.about} />
+        <SizeStat range={content.sizeRange} />
+        <MatchRateStat rate={content.matchRate} />
+        <OtherInternships
+            name={content.name}
+            otherInternships={content.otherInternships} />
+    </ScrollView>
 
 const styles = StyleSheet.create({
     title: {
@@ -142,7 +118,6 @@ const styles = StyleSheet.create({
     card: {
         width: '90%',
         paddingHorizontal: '10%',
-        paddingVertical: 20,
         backgroundColor: 'white',
         borderRadius: 20,
         shadowColor: '#000',
