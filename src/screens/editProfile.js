@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput} from 'react-native'
 import backButton from '../../assets/BackButton.png';
 
@@ -13,14 +13,29 @@ export default function editProfile(props) {
 
   function saveVals()
   {
+    if(name != "")
     global.name = name;
+    if(standing != "")
     global.standing = standing;
+    if(GPA != "")
     global.GPA = GPA;
+    if(experience != "")
     global.experience = experience;
+    if(courses != "")
     global.courses = courses;
+    if(statement != "")
     global.statement = statement;
     navigation.navigate('Profile')
   }
+
+  // useEffect(() => {
+  //   if(route.params.messageArray !== undefined) {
+  //     for(let i = 0; i < route.params.messageArray.length;i++) {
+  //       setName(global.name)
+  //       setStanding(global.standing)
+  //     }
+  //   }
+  // }, [navigation])
 
   return (
     <View style={styles.container}>
@@ -47,7 +62,7 @@ export default function editProfile(props) {
         <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>GPA:  </Text>
         <TextInput defaultValue = {global.GPA} onChangeText={text => setGPA(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
         <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>Experience: </Text>
-        <TextInput defaultValue = {global.experience} onChangeText={text => setExperience(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
+        <TextInput value = {global.experience} defaultValue = {global.experience} onChangeText={text => setExperience(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
         <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>Relevant Coursework: </Text>
         <TextInput defaultValue = {global.courses} onChangeText={text => setCourses(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', paddingRight: '3%', height: '7%', width: '100%', fontSize: 15}}></TextInput>
         <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 10}}>Personal Statement: </Text>
