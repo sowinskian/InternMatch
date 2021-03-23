@@ -2,7 +2,6 @@ import React, {useState, useEffect, useCallback }from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 
-let globalMessages = [];
 export default function Chat(props) {
   const { route, navigation } = props;
   const [messages, setMessages] = useState([]);
@@ -32,15 +31,17 @@ export default function Chat(props) {
         textStyle={{
           left: {
             color: '#fff'
+          },
+          title: {
+            color: '#eb0000'
           }
         }}
       />
     )
   }
 
-  
   return (
-    
+    <View style={{backgroundColor: 'FFECDB', flex: 1}}>
     <GiftedChat
       messages={messages}
       onSend={messages => onSend(messages)}
@@ -50,6 +51,7 @@ export default function Chat(props) {
       renderBubble={renderBubble}
       alwaysShowSend
     />
+    </View>
   )
 }
 
