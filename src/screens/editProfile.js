@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput} from 'react-native'
 import backButton from '../../assets/BackButton.png';
 
 export default function editProfile(props) {
   const { navigation } = props
+  const [name, setName] = useState("");
+  const [standing, setStanding] = useState("");
+  const [GPA, setGPA] = useState("");
+  const [experience, setExperience] = useState("");
+  const [courses, setCourses] = useState("");
+  const [statement, setStatement] = useState("");
 
   return (
     <View style={styles.container}>
@@ -23,11 +29,18 @@ export default function editProfile(props) {
       </View>
 
       <View style={styles.card}>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Name:  </Text><TextInput style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', padding: '5%', marginBottom: 10, fontSize: 15, position: 'absolute', left: 72, top: 15}}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>GPA:  </Text><TextInput style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', padding: '5%', marginBottom: 10, fontSize: 15, position: 'absolute', left: 62, top: 69 }}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Experience: </Text><TextInput style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', padding: '5%', marginBottom: 10, fontSize: 15, position: 'absolute', left: 110, top: 125 }}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Relevant Coursework: </Text><TextInput style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '47%', padding: '5%', marginBottom: 10, fontSize: 15, position: 'absolute', left: 180, top: 180 }}></TextInput>
-        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Personal Statement: </Text><TextInput style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '50%', padding: '5%', marginBottom: 10, fontSize: 15, position: 'absolute', left: 170, top: 230  }}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Name:  </Text>
+        <TextInput onChangeText={text => setName(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, paddingLeft: '3%', height: '7%', width: '70%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>School and Grade:  </Text>
+        <TextInput onChangeText={text => setStanding(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>GPA:  </Text>
+        <TextInput onChangeText={text => setGPA(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Experience: </Text>
+        <TextInput onChangeText={text => setExperience(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '70%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Relevant Coursework: </Text>
+        <TextInput onChangeText={text => setCourses(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '47%', fontSize: 15}}></TextInput>
+        <Text style={{fontSize: 14, fontWeight: 'bold', paddingTop: 13, paddingBottom: 23}}>Personal Statement: </Text>
+        <TextInput onChangeText={text => setStatement(text)} style={{ backgroundColor: '#FFFFFF', borderColor: '#FF8047', borderWidth: 3, borderRadius: 20, height: '7%', width: '50%', fontSize: 15}}></TextInput>
 
         <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.saveButton} >
             <Text style={styles.saveButtonText}>Save</Text>
@@ -68,6 +81,7 @@ const styles = StyleSheet.create({
     margin: "7%",
     padding: 20,
     alignItems: 'flex-start',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,

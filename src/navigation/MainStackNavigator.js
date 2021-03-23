@@ -15,7 +15,7 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Login'
+        initialRouteName='editProfile'
         screenOptions={{
           gestureEnabled: true,
           headerStyle: {
