@@ -57,12 +57,12 @@ export default function Profile(props) {
           />
         </TouchableOpacity>
 
-        <Image source={cap} style={{ width: '6%', height: "3%", position: 'absolute', left: 20, top: 65}}/>
+        <Image source={cap} style={{ width: '6%', height: "3%", position: 'absolute', left: 20, top: 62}}/>
         <View style={{flexDirection:'row', alignItems:'center'}}>
-          <Text style={{fontSize: 12, fontWeight: 'bold', paddingBottom: 10}}>{standing}</Text>
+          <Text style={{fontSize: 12, fontWeight: 'bold', paddingBottom: 10, marginLeft: 25}}>{standing}</Text>
         </View>
 
-        <Image source={aPicture} style={{ width: '5.3%', height: "2.6%", position: 'absolute', left: 22, top: 90}}/>
+        <Image source={aPicture} style={{ width: '5.3%', height: "2.6%", position: 'absolute', left: 22, top: 86}}/>
         <Text style={{fontSize: 12, fontWeight: 'bold'}}>         {GPA} GPA</Text>
 
         <Text style={{color: 'grey', fontSize: 25, marginBottom: 10}}>_______________________</Text>
@@ -131,7 +131,7 @@ export default function Profile(props) {
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Relevant Coursework</Text>
         <Text style={{color: 'grey', fontSize: 25, marginBottom: 10, paddingTop: 90}}>_______________________</Text>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Personal Statement</Text>
-        <Text style={{fontSize: 12, fontWeight: 'bold'}}>I'm interested in electrical and computer engineering for aeronautics. I want to build the systems that power spacecraft!</Text>
+        <Text style={{fontSize: 12, fontWeight: 'bold'}}>{statement}</Text>
 
       </View>
     </View>
