@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
+import Swiper from 'react-native-swiper';
 import Profile from '../../assets/Profile.png';
 import Messages from '../../assets/Messages.png';
 import Back from '../../assets/Back.png';
@@ -63,7 +64,7 @@ const topBarStyles = {
     }
 }
 
-const MatchOptions = ({onBack, onAdvance}) =>
+const MatchOptions = ({onBack, onSkip, onMatch}) =>
     <View style={matchOptionStyles.container}>
         <View style={matchOptionStyles.button}>
             <TouchableOpacity onPress={onBack}>
@@ -71,12 +72,12 @@ const MatchOptions = ({onBack, onAdvance}) =>
             </TouchableOpacity>
         </View>
         <View style={matchOptionStyles.button}>
-            <TouchableOpacity onPress={onAdvance}>
+            <TouchableOpacity onPress={onSkip}>
                 <Image source={Skip} style={matchOptionStyles.icon}/>
             </TouchableOpacity>
         </View>
         <View style={matchOptionStyles.button}>
-            <TouchableOpacity onPress={onAdvance}>
+            <TouchableOpacity onPress={onMatch}>
                 <Image source = {Match} style={matchOptionStyles.icon}/>
             </TouchableOpacity>
         </View>
@@ -103,30 +104,36 @@ const matchOptionStyles = {
 }
 
 export default function Home({navigation}) {
-  const [contentIndex, setContentIndex] = useState(0)
+  const swiperRef = useRef(null)
+  const [index, setIndex] = useState(0)
 
-
-  const nextOffer = () => {
-      if (contentIndex == InternshipPostings.length - 1) {
-          setContentIndex(0)
-      } else {
-          setContentIndex(contentIndex + 1)
-      }
+  const back = () => {
+    if (index > 0) {
+        swiperRef.current.scrollBy(-1)
+        setIndex(index - 1)
+    }
   }
 
-  const prevOffer = () => {
-      if (contentIndex == 0) {
-          setContentIndex(InternshipPostings.length - 1)
-      } else {
-          setContentIndex(contentIndex - 1)
-      }
+  const skip = () => {
+    if (index < InternshipPostings.length - 1) {
+        swiperRef.current.scrollBy(1)
+        setIndex(index + 1)
+    }
+  }
+
+  const match = () => {
+    InternshipPostings[index].matched = true
+    skip()
   }
 
   return (
     <View style={styles.container}>
       <TopBar navigation={navigation}/>
-      <JobCard content={InternshipPostings[contentIndex]}/>
-      <MatchOptions onBack={prevOffer} onAdvance={nextOffer}/>
+        <Swiper ref={swiperRef} showsButtons={false} showsPagination={false} loop={false}>
+            {InternshipPostings.map(posting =>
+                <JobCard content={posting} key={posting.name}/>)}
+        </Swiper>
+        <MatchOptions onBack={back} onSkip={skip} onMatch={match}/>
     </View>
   )
 }
@@ -135,7 +142,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: '7%',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFECDB'
   },
