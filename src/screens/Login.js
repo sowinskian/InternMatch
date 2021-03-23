@@ -15,6 +15,13 @@ export default function Login(props) {
   const [validEmail, setvalidEmail] = useState(true);
   const [validPass, setvalidPass] = useState(true);
 
+  global.name = "Zachary Jackson"
+    global.standing = "Junior at the University of Florida";
+    global.GPA = "3.60/4.00";
+    global.experience = "C,C++,Java,MATLAB,Microcontrollers,Circuits,DSP,Embedded Systems";
+    global.courses = "What is the good life, Data Structures, Digital Logic, Human-Computer Interaction";
+    global.statement = "I just want a job please..";
+
   function loginPress() {
     if (email.indexOf('@') == -1 || email.indexOf(".") == -1 || email.indexOf('@') > email.indexOf('.')) {
       setvalidEmail(false)
