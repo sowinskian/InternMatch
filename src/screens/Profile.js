@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, Button } from 'react-n
 import backButton from '../../assets/BackButton.png';
 import aPicture from '../../assets/a.png';
 import cap from '../../assets/cap.png';
+import editProfile from '../../assets/editImage.png';
 
 export default function Profile(props) {
   const { navigation } = props
@@ -26,6 +27,13 @@ export default function Profile(props) {
 
       <View style={styles.card}>
         <Text style={{fontSize: 30, fontWeight: 'bold', paddingBottom: 10}}>Zachary Jackson</Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate('editProfile')} style={{ width: '40%', height: "20%", position: 'absolute', left: 270, top: 25 }}>
+          <Image
+            source={editProfile}
+            style={{ width: '20%', height: "20%" }}
+          />
+        </TouchableOpacity>
 
         <Image source={cap} style={{ width: '6%', height: "3%", position: 'absolute', left: 20, top: 65}}/>
         <View style={{flexDirection:'row', alignItems:'center'}}>
