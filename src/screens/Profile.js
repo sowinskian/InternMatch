@@ -5,10 +5,8 @@ import aPicture from '../../assets/a.png';
 import cap from '../../assets/cap.png';
 import editProfile from '../../assets/editImage.png';
 
-var skills = 'c++, c, java, t, l, b';
-var skillsArr = skills.split(',');
-console.log(skillsArr);
-
+var experienceArr = [];
+var courseArr = [];
 export default function Profile(props) {
   const { navigation } = props
   const [name, setName] = useState("");
@@ -20,14 +18,15 @@ export default function Profile(props) {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      setName(name => name);
-      setStanding(standing => standing);
-      setGPA(GPA => GPA);
-      setExperience(experience => experience);
-      setCourses(courses => courses);
-      setStatement(statement => statement);
+      setName(name => global.name);
+      setStanding(standing => global.standing);
+      setGPA(GPA => global.GPA);
+      setExperience(experience => global.experience);
+      setCourses(courses => global.courses);
+      setStatement(statement => global.statement);
+      courseArr = global.courses.split(', ');
+      experienceArr = global.experience.split(',');
     });
-    
   })
 
 
@@ -64,7 +63,7 @@ export default function Profile(props) {
         </View>
 
         <Image source={aPicture} style={{ width: '5.3%', height: "2.6%", position: 'absolute', left: 22, top: 90}}/>
-        <Text style={{fontSize: 12, fontWeight: 'bold'}}>         3.60/4.00 GPA</Text>
+        <Text style={{fontSize: 12, fontWeight: 'bold'}}>         {GPA} GPA</Text>
 
         <Text style={{color: 'grey', fontSize: 25, marginBottom: 10}}>_______________________</Text>
         <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>Resume</Text>
