@@ -46,7 +46,14 @@ function MainStackNavigator() {
           name='Chat'
           component={Chat}
           options={({route}) => ({
-            title: route.params.companyName
+            title: route.params.companyName,
+            headerStyle: {
+              backgroundColor: '#FFECDB'
+            },
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+            headerTintColor: '#000',
           })}
         />
         <Stack.Screen
